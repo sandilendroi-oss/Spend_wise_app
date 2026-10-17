@@ -27,7 +27,7 @@ class CategoryIcon extends StatelessWidget {
         icon,
         color: iconColor,
         size: size * 0.5,
-      ),
+        ),
       );
   }
 }

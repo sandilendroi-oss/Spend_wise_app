@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:speed_wise_app/theme/app_colors.dart';
+import 'category_icon.dart';
 
 
 class ExpenseTile extends StatelessWidget {
@@ -21,18 +22,10 @@ class ExpenseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(14),
-        ),
-        child: Icon(
-          icon,
-          color: iconColor,
-          size: 24,
-        ),
+      leading: CategoryIcon(
+        icon: icon,
+        backgroundColor: backgroundColor,
+        iconColor: iconColor,
       ),
       title: Text(
         categoryName,
