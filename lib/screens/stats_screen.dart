@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/spend_category.dart';
 import '../theme/app_colors.dart';
-import '../widgets/bottom_nav_bar.dart'; // check this file name in lib/widgets
+import '../widgets/bottom_nav_bar.dart'; 
 import '../widgets/budget_card.dart';
 import '../widgets/donut_chart.dart';
 
