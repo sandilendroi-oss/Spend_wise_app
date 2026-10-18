@@ -28,11 +28,33 @@ class AppNav {
     _replaceStack(context, tab);
   }
 
+  static const _months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+
+  static String _formatDate(DateTime d) {
+    final h = d.hour % 12 == 0 ? 12 : d.hour % 12;
+    final m = d.minute.toString().padLeft(2, '0');
+    final ampm = d.hour >= 12 ? 'PM' : 'AM';
+    return '${_months[d.month - 1]} ${d.day}, ${d.year}, $h:$m $ampm';
+  }
+
   /// Opens details on top of the current tab. Back returns to that tab.
   static void openDetails(BuildContext context, Expense expense) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => ExpenseDetailsScreen(expense: expense),
+        builder: (_) => ExpenseDetailsScreen(
+          expenseData: {
+            'title': expense.merchant,
+            'amount': expense.amount,
+            'merchant': expense.merchant,
+            'category': expense.category,
+            'paymentMethod': expense.paymentMethod,
+            'date': _formatDate(expense.date),
+            'notes': expense.notes ?? '—',
+          },
+        ),
       ),
     );
   }
@@ -42,7 +64,7 @@ class AppNav {
   static void _replaceStack(BuildContext context, int tab) {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
-        pageBuilder: (ctx, _, __) => _screenFor(ctx, tab),
+        pageBuilder: (ctx, _, _) => _screenFor(ctx, tab),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
       ),
@@ -53,7 +75,6 @@ class AppNav {
   static Widget _screenFor(BuildContext ctx, int tab) {
     switch (tab) {
       case home:
-        // Contract the Home owner must follow: see notes.
         return HomeScreen(
           onNavTap: (i) => onTabTapped(ctx, i, home),
           onExpenseTap: (e) => openDetails(ctx, e),
