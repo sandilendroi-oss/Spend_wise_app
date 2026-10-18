@@ -13,13 +13,12 @@ SpendWise helps people record their daily spending, stay within a monthly budget
 1. [Project Vision](#project-vision)
 2. [Objectives](#objectives)
 3. [Features](#features)
-4. [Screens and Screenshots](#screens-and-screenshots)
-5. [Navigation Flow](#navigation-flow)
-6. [Project Structure](#project-structure)
-7. [Getting Started](#getting-started)
-8. [Design](#design)
-9. [Roadmap](#roadmap)
-10. [Team and Workflow](#team-and-workflow)
+4. [Navigation Flow](#navigation-flow)
+5. [Project Structure](#project-structure)
+6. [Getting Started](#getting-started)
+7. [Design](#design)
+8. [Roadmap](#roadmap)
+9. [Team and Workflow](#team-and-workflow)
 
 ---
 
@@ -106,7 +105,7 @@ To check your setup, run `flutter doctor`.
 
 ## Design
 
-- **Wireframes / UI design:** [Figma link](#) *(add link)*
+- **Wireframes / UI design:** [Figma link](#) *https://www.figma.com/design/M6uNxY943fLev9XJcjnPpx/Untitled?node-id=0-1&t=92dVFBTKX2SMGlNO-1*
 - **Style:** a soft green palette, rounded white cards, and clear typography. Colors are defined in `lib/theme/app_colors.dart`.
 
 ## Roadmap
