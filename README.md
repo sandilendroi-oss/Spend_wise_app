@@ -131,7 +131,7 @@ To check your setup, run `flutter doctor`.
 - Shariana Dee
 - Mohana Aswath
 
-**Git workflow:** each contributor works on a separate branch (for example `feature/stats-screen`), commits with clear messages, and opens a pull request into `main`.
+**Git workflow:** Each contributor works on a separate branch, commits with clear messages, and opens a pull request into `main`.
 
 ---
 
