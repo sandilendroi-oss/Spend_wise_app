@@ -1,37 +1,146 @@
-# Spend_wise_app
-Flutter mobile application for Speed Wise
+# SpendWise 
 
-**Project Vision**
+**A simple personal expense tracker built with Flutter.**
 
-To empower individuals—especially students and young professionals—to achieve financial mindfulness through a seamless, lightweight, and clutter-free mobile experience. SpendWise transforms everyday expense tracking into effortless self-awareness, replacing tedious spreadsheets with instant local logging, clear budget alerts, and intuitive visual insights.
+SpendWise helps people record their daily spending, stay within a monthly budget, and understand where their money goes, using clear summaries and charts.
 
- **Project Objectives**
-- Track Expenses: Allow users to record and organize their daily expenses into categories such as groceries, food, transportation, and bills.
-- Manage Budgets: Help users set monthly spending limits for different categories and monitor how much of each budget has been used.
-- Monitor Spending: Provide a clear overview of total expenses, remaining budgets, and recent transactions.
-- Understand Spending Habits: Present simple charts and reports that help users identify where most of their money goes.
-- Control Spending: Notify users when their spending approaches or exceeds their budget limits.
-- Simplify Expense Management: Provide a user-friendly interface that makes tracking expenses and managing budgets quick and easy.
+> **Status:** Week 2 UI prototype. The screens are built and connected with sample data. Real authentication, a database, and full add/edit/delete are planned for later weeks.
 
-**Navigation Flow**
+---
 
-1. Authentication Flow
-- Entry Point: App Launch
-- Screen: Login
-- Log In Button: Validates credentials  Navigates to Home (Dashboard).
-- Sign Up link: Navigates to the Sign Up screen.
-- Forgot Password? link: Navigates to the Password Reset flow.
-2. Main Navigation Bar (Bottom Navigation)
-From both the Home and Stats screens, the bottom navigation bar provides direct tab switching:
-- Home Tab (Active on Home): Displays total balance, weekly spending chart, and recent transactions.
-- Stats Tab (Active on Stats): Switches to the Stats screen to view daily/weekly breakdown charts and category limits.
-- Add Tab (+ Icon): Opens the Add Expense screen (or presents it as a modal form).
-- Settings Tab: Navigates to the Budget Settings screen.
-3. Action & Modal Flows
-From Home or Stats Screen:
-- Tap the center Add (+) icon on the bottom navigation bar -> Opens Add Expense.
-- Tap Recent Transactions / View All -> Navigates to Expense List.
-- From Add Expense Screen:
-- Back Arrow -> : Cancels entry and returns to the previous screen (Home or Stats).
-- + Create new category: Opens a modal or prompt to create a custom category.
-- Save Expense Button: Validates inputs, saves the transaction, and returns to Home / Stats with updated totals.
+## Table of Contents
+
+1. [Project Vision](#project-vision)
+2. [Objectives](#objectives)
+3. [Features](#features)
+4. [Screens and Screenshots](#screens-and-screenshots)
+5. [Navigation Flow](#navigation-flow)
+6. [Project Structure](#project-structure)
+7. [Getting Started](#getting-started)
+8. [Design](#design)
+9. [Roadmap](#roadmap)
+10. [Team and Workflow](#team-and-workflow)
+
+---
+
+## Project Vision
+
+Many people reach the end of the month unsure where their money went. Spreadsheets are tedious, and many finance apps are cluttered. SpendWise aims to be a fast, friendly, and uncluttered way to log expenses in a few taps and see clearly how much of the budget is left.
+
+## Objectives
+
+- Make logging an expense quick and effortless.
+- Give users an at-a-glance view of what they have spent and what remains in their budget.
+- Show which categories take up the largest share of their spending.
+- Warn users before they overspend, not after.
+- Build a clean, consistent Flutter UI based on our Figma design, using reusable widgets.
+
+## Features
+
+**In the current prototype (sample data)**
+
+- **Login:** welcome screen with email and password fields.
+- **Home / Dashboard:** total balance, weekly spending chart, and recent expenses.
+- **Stats:** weekly date selector, daily spending donut chart, and a budget breakdown by category (Groceries, Food & Drink, Bills).
+- **Expense Details:** amount, merchant, date, category, payment method, notes, and receipt placeholder.
+- **Bottom navigation** shared across the main screens.
+
+**Planned**
+
+- Add, edit, and delete expenses
+- Monthly budget with a warning when spending nears the limit
+- Weekly and monthly spending reports
+- Real authentication and persistent storage
+
+## Screens and Screenshots
+
+| Login | Home | Stats | Expense Details |
+|:---:|:---:|:---:|:---:|
+| ![Login](docs/screenshots/login.png) | ![Home](docs/screenshots/home.png) | ![Stats](docs/screenshots/stats.png) | ![Expense Details](docs/screenshots/expense_details.png) |
+
+> Screenshots go in `docs/screenshots/`. Replace the file names above if yours are different.
+
+## Navigation Flow
+
+```mermaid
+flowchart LR
+    A[Login] -->|Log In| B[Home]
+    B -->|Stats tab| C[Stats]
+    B -->|Add Expense tab| D[Add Expense*]
+    B -->|Settings tab| E[Settings*]
+    B -->|Tap an expense| F[Expense Details]
+    F -->|Back| B
+    C --> B
+```
+
+\* Placeholder screens for now.
+
+In words:
+
+1. The user opens the app on the **Login** screen and taps **Log In**.
+2. They land on **Home**, which shows their balance, weekly spending, and recent expenses. After logging in, the back button does not return to Login.
+3. The **bottom navigation bar** (Home, Add Expense, Settings, Stats) switches between the main sections.
+4. Tapping an expense on Home opens **Expense Details**, and the back button returns to where the user came from.
+
+## Project Structure
+
+```
+lib/
+├── main.dart          # App entry point and theme
+├── screens/           # Full pages (login, home, stats, expense details)
+├── widgets/           # Reusable components (budget card, bottom nav, donut chart, ...)
+├── models/            # Data classes and sample data
+└── theme/             # App colors and theme
+```
+
+## Getting Started
+
+**Prerequisites:** [Flutter SDK](https://docs.flutter.dev/get-started/install) and an emulator, simulator, or physical device (or Chrome for web).
+
+```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd Spend_wise_app
+
+# 2. Install dependencies
+flutter pub get
+
+# 3. Run the app
+flutter run
+```
+
+To check your setup, run `flutter doctor`.
+
+## Design
+
+- **Wireframes / UI design:** [Figma link](#) *(add link)*
+- **Style:** a soft green palette, rounded white cards, and clear typography. Colors are defined in `lib/theme/app_colors.dart`.
+
+## Roadmap
+
+- [x] Week 1: proposal, wireframes, repository setup
+- [x] Week 2: UI prototype with navigation (sample data)
+- [ ] Week 3: connect real data, working add/edit/delete
+- [ ] Later: monthly budget warnings, reports, authentication, storage
+
+## Team and Workflow
+
+**Team 3 (0510 SLU MAD)**
+
+- Shimaa Kamal M
+- Adeniyi Adeyinka
+- Ange Mukundente
+- Sabikun Naher Meem
+- Chaudhary Siddhant Baliyan
+- Emama
+- Eseosa Ogolo
+- Kevin Okhale
+- Sandile Ndroi
+- Shariana Dee
+- Mohana Aswath
+
+**Git workflow:** each contributor works on a separate branch (for example `feature/stats-screen`), commits with clear messages, and opens a pull request into `main`.
+
+---
+
+Built as part of a mobile app internship.
