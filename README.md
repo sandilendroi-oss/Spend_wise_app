@@ -105,7 +105,7 @@ To check your setup, run `flutter doctor`.
 
 ## Design
 
-- **Wireframes / UI design:** [Figma link](#) *https://www.figma.com/design/M6uNxY943fLev9XJcjnPpx/Untitled?node-id=0-1&t=92dVFBTKX2SMGlNO-1*
+- **Wireframes / UI design:** [Figma link](#) *(https://www.figma.com/design/M6uNxY943fLev9XJcjnPpx/Untitled?node-id=0-1&t=92dVFBTKX2SMGlNO-1)*
 - **Style:** a soft green palette, rounded white cards, and clear typography. Colors are defined in `lib/theme/app_colors.dart`.
 
 ## Roadmap
