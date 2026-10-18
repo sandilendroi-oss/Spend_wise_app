@@ -52,13 +52,6 @@ Many people reach the end of the month unsure where their money went. Spreadshee
 - Weekly and monthly spending reports
 - Real authentication and persistent storage
 
-## Screens and Screenshots
-
-| Login | Home | Stats | Expense Details |
-|:---:|:---:|:---:|:---:|
-| ![Login](docs/screenshots/login.png) | ![Home](docs/screenshots/home.png) | ![Stats](docs/screenshots/stats.png) | ![Expense Details](docs/screenshots/expense_details.png) |
-
-> Screenshots go in `docs/screenshots/`. Replace the file names above if yours are different.
 
 ## Navigation Flow
 
