@@ -99,8 +99,8 @@ class _SettingsPlaceholder extends StatelessWidget {
       appBar: AppBar(title: const Text('Settings')),
       body: const Center(child: Text('Settings - coming soon')),
       bottomNavigationBar: BottomNavBar(
-        currentIndex: AppNav.settings,
-        onTap: onNavTap,
+        currentIndex: AppNav.settings, // 2
+        onTap: (index) => AppNav.onTabTapped(context, index, AppNav.settings),
       ),
     );
   }

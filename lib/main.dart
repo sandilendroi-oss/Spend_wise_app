@@ -18,12 +18,7 @@ class SpendWiseApp extends StatelessWidget {
       title: 'SpendWise',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      initialRoute: '/',
-      // Define all your named routes here:
-      routes: {
-        '/': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(), // <-- This resolves the error!
-      }, // Change this to your desired initial screen
+      home: const StatsScreen(), // Change this to your desired initial screen
     );
   }
 }

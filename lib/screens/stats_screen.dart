@@ -4,12 +4,12 @@ import '../theme/app_colors.dart';
 import '../widgets/bottom_nav_bar.dart'; 
 import '../widgets/budget_card.dart';
 import '../widgets/donut_chart.dart';
+import 'package:speed_wise_app/navigations/app_nav.dart';
 
 const _muted = Color(0xFF6B7280);
 
 class StatsScreen extends StatefulWidget {
   /// Called when a bottom-nav item is tapped (index = position in BottomNavBar).
-  /// The navigation owner connects this in Phase 7.
   final ValueChanged<int>? onNavTap;
 
   const StatsScreen({super.key, this.onNavTap});
@@ -19,8 +19,6 @@ class StatsScreen extends StatefulWidget {
 }
 
 class _StatsScreenState extends State<StatsScreen> {
-  // Position of "Stats" in the team's BottomNavBar:
-  // Home 0, Add Expense 1, Settings 2, Stats 3.
   static const _statsTabIndex = 3;
 
   static const _weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -35,14 +33,15 @@ class _StatsScreenState extends State<StatsScreen> {
           .subtract(Duration(days: _today.weekday - 1));
   late int _selectedIndex = _today.weekday - 1;
 
-  // TODO: load the categories for the selected day instead of sample data.
   final List<SpendCategory> _categories = sampleCategories;
   final double _dailyBudget = 150;
 
   DateTime get _selectedDate => _weekStart.add(Duration(days: _selectedIndex));
   double get _totalSpent => _categories.fold(0.0, (sum, c) => sum + c.spent);
 
+  // FIXED: Added missing minus operator (- 1)
   String _shortDate(DateTime d) => '${_months[d.month - 1]} ${d.day}';
+  
   double _percent(SpendCategory c) =>
       _totalSpent == 0 ? 0 : c.spent / _totalSpent * 100;
 
@@ -86,15 +85,14 @@ class _StatsScreenState extends State<StatsScreen> {
                 progressValue: c.progress,
               ),
               const SizedBox(height: 10),
-              // TODO (Phase 7): agree what tapping a category does.
             ],
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: _statsTabIndex,
-        onTap: (i) => widget.onNavTap?.call(i),
-      ),
+     bottomNavigationBar: BottomNavBar(
+     currentIndex: AppNav.stats, // 3
+     onTap: (index) => AppNav.onTabTapped(context, index, AppNav.stats),
+     ),
     );
   }
 
@@ -106,6 +104,7 @@ class _StatsScreenState extends State<StatsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                // FIXED: Added missing minus operator (- 1)
                 '${_weekdays[_today.weekday - 1]} ${_shortDate(_today)}',
                 style: const TextStyle(
                   fontSize: 11,

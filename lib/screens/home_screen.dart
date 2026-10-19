@@ -5,6 +5,7 @@ import 'package:speed_wise_app/widgets/bottom_nav_bar.dart';
 import 'package:speed_wise_app/widgets/expense_tile.dart';
 import 'package:speed_wise_app/widgets/spending_bar_chart.dart';
 import '../models/expense.dart';
+import 'package:speed_wise_app/navigations/app_nav.dart';
 
 class HomeScreen extends StatelessWidget {
   final ValueChanged<int>? onNavTap;
@@ -38,24 +39,34 @@ class HomeScreen extends StatelessWidget {
   ];
   static const List<double> _weeklySpending = [42, 65, 30, 88, 54, 120, 76];
 
-  static const List<_RecentExpense> _recentExpenses = [
-    _RecentExpense(
-      icon: Icons.shopping_cart_outlined,
-      title: 'Whole Foods',
+  static final List<Expense> _recentExpenses = [
+    Expense(
+      id: '1',
+      merchant: 'Woolworths',
       category: 'Groceries',
-      amount: '-84.20',
+      amount: 452.90,
+      date: DateTime(2026, 10, 16, 14, 30),
+      paymentMethod: 'Visa •••• 4417',
+      notes: 'Weekly groceries',
+      icon: Icons.shopping_basket_outlined,
     ),
-    _RecentExpense(
-      icon: Icons.local_cafe_outlined,
-      title: 'Starbucks',
+    Expense(
+      id: '2',
+      merchant: "Nando's",
       category: 'Food & Drink',
-      amount: '-5.50',
+      amount: 189.00,
+      date: DateTime(2026, 10, 17, 19, 10),
+      paymentMethod: 'Cash',
+      icon: Icons.restaurant_outlined,
     ),
-    _RecentExpense(
-      icon: Icons.bolt,
-      title: 'Electricity Bill',
-      category: 'Bills',
-      amount: '-120.00',
+    Expense(
+      id: '3',
+      merchant: 'Starbucks',
+      category: 'Food & Drink',
+      amount: 5.50,
+      date: DateTime(2026, 10, 18, 9, 15),
+      paymentMethod: 'Visa •••• 4417',
+      icon: Icons.local_cafe_outlined,
     ),
   ];
 
@@ -97,10 +108,10 @@ class HomeScreen extends StatelessWidget {
                         const Divider(height: 1, indent: 16, endIndent: 16),
                       ExpenseTile(
                         icon: _recentExpenses[i].icon,
-                        categoryName: _recentExpenses[i].title,
+                        categoryName: _recentExpenses[i].merchant,
                         subtitle: _recentExpenses[i].category,
-                        amount: _recentExpenses[i].amount,
-                        onTap: () => onExpenseTap?.call(_recentExpenses[i] as Expense),
+                        amount: '-${_recentExpenses[i].amount.toStringAsFixed(2)}',
+                        onTap: () => onExpenseTap?.call(_recentExpenses[i]),
                       ),
                     ],
                   ],
@@ -110,11 +121,11 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      // Display only. The integrator wires real navigation in Phase 7.
+
       bottomNavigationBar: BottomNavBar(
-        currentIndex: 0,
-        onTap: (_) {},
-      ),
+      currentIndex: AppNav.home, // 0
+      onTap: (index) => AppNav.onTabTapped(context, index, AppNav.home),
+),
     );
   }
 }
@@ -183,16 +194,3 @@ class _SectionTitle extends StatelessWidget {
   }
 }
 
-class _RecentExpense {
-  final IconData icon;
-  final String title;
-  final String category;
-  final String amount;
-
-  const _RecentExpense({
-    required this.icon,
-    required this.title,
-    required this.category,
-    required this.amount,
-  });
-}
