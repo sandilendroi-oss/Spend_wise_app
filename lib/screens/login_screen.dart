@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:speed_wise_app/theme/app_colors.dart';
 import 'package:speed_wise_app/theme/app_theme.dart';
+import 'package:speed_wise_app/navigations/app_nav.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -93,7 +94,7 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigate to the home screen
-                Navigator.pushReplacementNamed(context, '/home');
+                AppNav.goHomeAfterLogin(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.cardWhiteColor,

@@ -100,6 +100,7 @@ class HomeScreen extends StatelessWidget {
                         categoryName: _recentExpenses[i].title,
                         subtitle: _recentExpenses[i].category,
                         amount: _recentExpenses[i].amount,
+                        onTap: () => onExpenseTap?.call(_recentExpenses[i] as Expense),
                       ),
                     ],
                   ],
