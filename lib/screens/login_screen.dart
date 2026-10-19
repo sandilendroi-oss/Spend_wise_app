@@ -10,14 +10,107 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.darkGreenColor,
       body: Center(
-        child: Text(
-          'Welcome to SpendWise!',
-          style: TextStyle(
-            color: AppColors.lightBackgroundColor,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Welcome to SpendWise',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: AppColors.cardWhiteColor,
+              ),
+            ),
+            Card(
+              color: AppColors.cardWhiteColor,
+              margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.darkGreenColor,
+                      ),
+                    ),
+                    Text(
+                      'Please enter your credentials to continue',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.textColor,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Email",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.textColor,
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            labelStyle:
+                                const TextStyle(color: AppColors.textColor),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          "Password",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.textColor,
+                          ),
+                        ),
+                        TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle:
+                                const TextStyle(color: AppColors.textColor),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to the home screen
+                Navigator.pushReplacementNamed(context, '/home');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.cardWhiteColor,
+                foregroundColor: AppColors.darkGreenColor,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
+                'Login',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ],
+        )
       ),
     );
   }

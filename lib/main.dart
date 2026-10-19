@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:speed_wise_app/screens/expense_details_screen.dart';
+import 'package:speed_wise_app/screens/home_screen.dart';
+import 'package:speed_wise_app/screens/stats_screen.dart';
 import 'screens/login_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -15,7 +18,12 @@ class SpendWiseApp extends StatelessWidget {
       title: 'SpendWise',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const LoginScreen(),
+      initialRoute: '/',
+      // Define all your named routes here:
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(), // <-- This resolves the error!
+      }, // Change this to your desired initial screen
     );
   }
 }
