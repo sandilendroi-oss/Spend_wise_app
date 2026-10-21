@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color cardWhiteColor = Color(0xFFFFFFFF);
-  static const Color lightBackgroundColor = Color(0xFFF0FDF4);
-  static const Color textColor = Color.fromARGB(255, 6, 78, 59);
-  static const Color darkGreenColor = Color.fromARGB(255, 28, 58, 39);
-  static const Color cardLightGreen = Color.fromARGB(255, 186, 230, 189);
+
+    // Excelerate brand (sampled from logo)
+  static const Color orangeColor  = Color(0xFFEA7553);
+  static const Color coralColor   = Color(0xFFEB684B);
+  static const Color pinkColor    = Color(0xFFD9508A);
+  static const Color magentaColor = Color(0xFFCC43B3);
+
+  static const Color primaryColor    = coralColor;
+  static const Color secondaryColor  = magentaColor;
+  static const Color backgroundColor = Color(0xFFFFF7F4); // soft warm white
+  static const Color cardWhiteColor  = Color(0xFFFFFFFF);
+  static const Color textColor       = Color(0xFF2B2B33); // dark neutral
+
+   // Logo-style gradient, reusable on buttons / headers
+  static const LinearGradient brandGradient = LinearGradient(
+    colors: [orangeColor, coralColor, pinkColor, magentaColor],
+  );
+
 }

@@ -17,8 +17,8 @@ class SpendWiseApp extends StatelessWidget {
     return MaterialApp(
       title: 'SpendWise',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: const StatsScreen(), // Change this to your desired initial screen
+      theme: AppTheme.light,
+      home: const LoginScreen(), // Change this to your desired initial screen
     );
   }
 }

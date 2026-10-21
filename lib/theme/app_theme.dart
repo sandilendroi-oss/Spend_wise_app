@@ -2,63 +2,79 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppTheme {
-  // Private constructor to prevent instantiation
   AppTheme._();
 
-  static ThemeData get lightTheme {
+  static ThemeData get light {
+    final shape =
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12));
+
     return ThemeData(
       useMaterial3: true,
-      
-      // 1. Color Scheme generated from your seed + custom overrides
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.textColor,
-        brightness: Brightness.light,
-        primary: AppColors.textColor,
-        onPrimary: AppColors.cardWhiteColor,
-        secondary: AppColors.darkGreenColor,
-        surface: AppColors.cardLightGreen,
-        onSurface: AppColors.textColor,
+        seedColor: AppColors.primaryColor,
+        primary: AppColors.primaryColor,
+        secondary: AppColors.secondaryColor,
+        surface: AppColors.cardWhiteColor,
       ),
+      scaffoldBackgroundColor: AppColors.backgroundColor,
 
-      // 2. Page Scaffold Background
-      scaffoldBackgroundColor: AppColors.lightBackgroundColor,
+      // Default font, just set the text color
+      textTheme: ThemeData.light().textTheme.apply(
+            bodyColor: AppColors.textColor,
+            displayColor: AppColors.textColor,
+          ),
 
-      // 3. App Bar Theme
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.darkGreenColor,
-        foregroundColor: AppColors.cardLightGreen,
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.cardWhiteColor,
         elevation: 0,
-        centerTitle: true,
-      ),
-
-      // 4. Default Card Theme
-      cardTheme: CardThemeData(
-        color: AppColors.cardWhiteColor,
-        elevation: 1.5,
-        shadowColor: AppColors.darkGreenColor.withValues(alpha: 0.1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          color: AppColors.cardWhiteColor,
         ),
       ),
 
-      // 5. Global Text Theme
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(color: AppColors.textColor, fontWeight: FontWeight.bold),
-        titleLarge: TextStyle(color: AppColors.textColor, fontWeight: FontWeight.w600),
-        bodyLarge: TextStyle(color: AppColors.textColor),
-        bodyMedium: TextStyle(color: AppColors.textColor),
-      ),
-
-      // 6. Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.textColor,
+          backgroundColor: AppColors.primaryColor,
           foregroundColor: AppColors.cardWhiteColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          minimumSize: const Size(88, 48),
+          textStyle: const TextStyle(fontWeight: FontWeight.w600),
+          shape: shape,
         ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.primaryColor,
+          side: const BorderSide(color: AppColors.primaryColor),
+          minimumSize: const Size(88, 48),
+          textStyle: const TextStyle(fontWeight: FontWeight.w600),
+          shape: shape,
+        ),
+      ),
+
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: const TextStyle(color: AppColors.textColor),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
+        ),
+      ),
+
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: AppColors.secondaryColor,
+        foregroundColor: AppColors.cardWhiteColor,
+      ),
+
+      navigationBarTheme: NavigationBarThemeData(
+        indicatorColor: AppColors.secondaryColor.withValues(alpha: 0.25),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: AppColors.primaryColor,
+        unselectedItemColor: AppColors.textColor,
+        backgroundColor: AppColors.cardWhiteColor,
       ),
     );
   }
