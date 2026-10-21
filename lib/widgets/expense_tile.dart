@@ -60,7 +60,7 @@ class ExpenseTile extends StatelessWidget {
   const ExpenseTile({
     super.key,
     required this.icon,
-    this.backgroundColor = AppColors.lightBackgroundColor,
+    this.backgroundColor = AppColors.backgroundColor,
     this.iconColor = const Color(0xFF25834A),
     required this.categoryName,
     required this.amount,

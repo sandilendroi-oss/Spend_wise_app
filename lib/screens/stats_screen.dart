@@ -50,7 +50,7 @@ class _StatsScreenState extends State<StatsScreen> {
     final sorted = [..._categories]..sort((a, b) => b.spent.compareTo(a.spent));
 
     return Scaffold(
-      backgroundColor: AppColors.lightBackgroundColor,
+      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
@@ -163,7 +163,7 @@ class _StatsScreenState extends State<StatsScreen> {
             width: 40,
             padding: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
-              color: selected ? AppColors.darkGreenColor : Colors.transparent,
+              color: selected ? AppColors.primaryColor : Colors.transparent,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(

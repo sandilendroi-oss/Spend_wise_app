@@ -16,7 +16,7 @@ class BudgetCard extends StatelessWidget {
   const BudgetCard({
     super.key,
     required this.icon,
-    this.backgroundColor = AppColors.lightBackgroundColor,
+    this.backgroundColor = AppColors.backgroundColor,
     this.iconColor = const Color(0xFF25834A),
     required this.categoryName,
     required this.percentageSubtitle,
@@ -103,8 +103,8 @@ class BudgetCard extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: progressValue.clamp(0.0, 1.0),
                 minHeight: 8,
-                backgroundColor: AppColors.lightBackgroundColor,
-                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.darkGreenColor),
+                backgroundColor: AppColors.backgroundColor,
+                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
               ),
             ),
             const SizedBox(height: 12),
@@ -115,7 +115,7 @@ class BudgetCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: AppColors.darkGreenColor,
+                color: AppColors.textColor,
               ),
             ),
           ],

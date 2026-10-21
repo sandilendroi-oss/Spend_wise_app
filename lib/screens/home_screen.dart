@@ -165,10 +165,10 @@ class _Header extends StatelessWidget {
         ),
         const CircleAvatar(
           radius: 22,
-          backgroundColor: AppColors.darkGreenColor,
+          backgroundColor: AppColors.primaryColor,
           child: Icon(
             Icons.person,
-            color: AppColors.cardLightGreen,
+            color: AppColors.cardWhiteColor,
           ),
         ),
       ],

@@ -9,7 +9,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkGreenColor,
+      backgroundColor: AppColors.primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.darkGreenColor,
+                        color: AppColors.primaryColor,
                       ),
                     ),
                     Text(
@@ -48,13 +48,7 @@ class LoginScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Email",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.textColor,
-                          ),
-                        ),
+                       
                         TextField(
                           decoration: InputDecoration(
                             labelText: 'Email',
@@ -66,13 +60,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                          "Password",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.textColor,
-                          ),
-                        ),
+                        
                         TextField(
                           obscureText: true,
                           decoration: InputDecoration(
@@ -98,7 +86,7 @@ class LoginScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.cardWhiteColor,
-                foregroundColor: AppColors.darkGreenColor,
+                foregroundColor: AppColors.backgroundColor,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 shape: RoundedRectangleBorder(

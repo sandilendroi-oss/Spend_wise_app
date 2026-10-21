@@ -81,8 +81,8 @@ class _Bar extends StatelessWidget {
           height: barHeight,
           decoration: BoxDecoration(
             color: highlighted
-                ? AppColors.darkGreenColor
-                : AppColors.cardLightGreen,
+                ? AppColors.primaryColor
+                : AppColors.primaryColor.withOpacity(0.5),
             borderRadius: BorderRadius.circular(8),
           ),
         ),
