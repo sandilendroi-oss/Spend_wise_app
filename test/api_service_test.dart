@@ -277,6 +277,7 @@ void main() {
       () async {
         var called = false;
         final api = ApiService(
+           baseUrl: 'https://YOUR_PROJECT_ID.mockapi.io/api/v1',
           client: MockClient((_) async {
             called = true;
             return _json('[]');

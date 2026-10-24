@@ -12,7 +12,7 @@ import 'package:speed_wise_app/models/program.dart';
 ///   flutter run --dart-define=API_BASE_URL=https://xxxx.mockapi.io/api/v1
 class ApiConfig {
   static const String placeholderBaseUrl =
-      'https://YOUR_PROJECT_ID.mockapi.io/api/v1';
+    'https://6adc37259cae184827ad0d2b.mockapi.io/api/v1';
 
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
