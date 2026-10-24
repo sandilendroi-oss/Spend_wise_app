@@ -4,13 +4,15 @@ import 'package:speed_wise_app/widgets/balance_card.dart';
 import 'package:speed_wise_app/widgets/bottom_nav_bar.dart';
 import 'package:speed_wise_app/widgets/expense_tile.dart';
 import 'package:speed_wise_app/widgets/spending_bar_chart.dart';
+
 import '../models/expense.dart';
+
 import 'package:speed_wise_app/navigations/app_nav.dart';
 
 class HomeScreen extends StatelessWidget {
   final ValueChanged<int>? onNavTap;
   final ValueChanged<Expense>? onExpenseTap;
-  const HomeScreen({super.key , this.onNavTap, this.onExpenseTap});
+  const HomeScreen({super.key, this.onNavTap, this.onExpenseTap});
 
   static const List<String> _monthNames = [
     'January',
@@ -110,7 +112,8 @@ class HomeScreen extends StatelessWidget {
                         icon: _recentExpenses[i].icon,
                         categoryName: _recentExpenses[i].merchant,
                         subtitle: _recentExpenses[i].category,
-                        amount: '-${_recentExpenses[i].amount.toStringAsFixed(2)}',
+                        amount:
+                            '-${_recentExpenses[i].amount.toStringAsFixed(2)}',
                         onTap: () => onExpenseTap?.call(_recentExpenses[i]),
                       ),
                     ],
@@ -123,9 +126,9 @@ class HomeScreen extends StatelessWidget {
       ),
 
       bottomNavigationBar: BottomNavBar(
-      currentIndex: AppNav.home, // 0
-      onTap: (index) => AppNav.onTabTapped(context, index, AppNav.home),
-),
+        currentIndex: AppNav.home, // 0
+        onTap: (index) => AppNav.onTabTapped(context, index, AppNav.home),
+      ),
     );
   }
 }
@@ -166,10 +169,7 @@ class _Header extends StatelessWidget {
         const CircleAvatar(
           radius: 22,
           backgroundColor: AppColors.primaryColor,
-          child: Icon(
-            Icons.person,
-            color: AppColors.cardWhiteColor,
-          ),
+          child: Icon(Icons.person, color: AppColors.cardWhiteColor),
         ),
       ],
     );
@@ -193,4 +193,3 @@ class _SectionTitle extends StatelessWidget {
     );
   }
 }
-

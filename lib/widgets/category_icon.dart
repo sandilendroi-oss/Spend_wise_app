@@ -23,11 +23,7 @@ class CategoryIcon extends StatelessWidget {
         color: backgroundColor,
         borderRadius: BorderRadius.circular(14),
       ),
-      child: Icon(
-        icon,
-        color: iconColor,
-        size: size * 0.5,
-        ),
-      );
+      child: Icon(icon, color: iconColor, size: size * 0.5),
+    );
   }
 }

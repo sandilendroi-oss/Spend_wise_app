@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 /// Donut chart drawn with CustomPainter (no extra packages).
@@ -56,8 +57,10 @@ class _DonutPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final radius = (math.min(size.width, size.height) - strokeWidth) / 2;
-    final rect =
-        Rect.fromCircle(center: size.center(Offset.zero), radius: radius);
+    final rect = Rect.fromCircle(
+      center: size.center(Offset.zero),
+      radius: radius,
+    );
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
