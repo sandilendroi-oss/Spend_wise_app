@@ -4,7 +4,10 @@ import 'package:speed_wise_app/theme/app_colors.dart';
 class BalanceCard extends StatelessWidget {
   final String amount;
 
-  const BalanceCard({super.key, required this.amount});
+  const BalanceCard({
+    super.key,
+    required this.amount,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'app_colors.dart';
 
 class AppTheme {
   AppTheme._();
 
   static ThemeData get light {
-    final shape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12),
-    );
+    final shape =
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12));
 
     return ThemeData(
       useMaterial3: true,
@@ -22,9 +20,9 @@ class AppTheme {
 
       // Default font, just set the text color
       textTheme: ThemeData.light().textTheme.apply(
-        bodyColor: AppColors.textColor,
-        displayColor: AppColors.textColor,
-      ),
+            bodyColor: AppColors.textColor,
+            displayColor: AppColors.textColor,
+          ),
 
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.primaryColor,

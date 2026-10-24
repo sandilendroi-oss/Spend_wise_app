@@ -2,6 +2,7 @@
 // import 'package:speed_wise_app/theme/app_colors.dart';
 // import 'category_icon.dart';
 
+
 // class ExpenseTile extends StatelessWidget {
 //   final IconData icon;
 //   final Color backgroundColor;
@@ -40,12 +41,11 @@
 //           fontWeight: FontWeight.w600,
 //         ),
 //       ),
-//     );
+//     );  
 // }
 //   }
 import 'package:flutter/material.dart';
 import 'package:speed_wise_app/theme/app_colors.dart';
-
 import 'category_icon.dart';
 
 class ExpenseTile extends StatelessWidget {
@@ -54,7 +54,6 @@ class ExpenseTile extends StatelessWidget {
   final Color iconColor;
   final String categoryName;
   final String amount;
-
   /// Optional second line under [categoryName] (e.g. "Groceries").
   final String? subtitle;
   final VoidCallback? onTap;
@@ -88,18 +87,27 @@ class ExpenseTile extends StatelessWidget {
       ),
       title: Text(
         categoryName,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       subtitle: subtitle == null
           ? null
           : Text(
               subtitle!,
-              style: const TextStyle(fontSize: 13, color: AppColors.textColor),
+              style: const TextStyle(
+                fontSize: 13,
+                color: AppColors.textColor,
+              ),
             ),
       trailing: Text(
         _formattedAmount,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
       ),
-    );
+    );  
+   }
   }
-}

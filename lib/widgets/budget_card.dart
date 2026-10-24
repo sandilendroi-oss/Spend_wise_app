@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:speed_wise_app/theme/app_colors.dart';
-
 import 'category_icon.dart';
 
 class BudgetCard extends StatelessWidget {
@@ -9,10 +8,10 @@ class BudgetCard extends StatelessWidget {
   final Color iconColor;
   final String categoryName;
   final String percentageSubtitle; // e.g., "34.9% of today"
-  final String spentAmount; // e.g., "42.10"
-  final String limitAmount; // e.g., "50"
-  final String remainingAmount; // e.g., "$7.90 remaining"
-  final double progressValue; // e.g., 0.349 (from 0.0 to 1.0)
+  final String spentAmount;      // e.g., "42.10"
+  final String limitAmount;      // e.g., "50"
+  final String remainingAmount;  // e.g., "$7.90 remaining"
+  final double progressValue;    // e.g., 0.349 (from 0.0 to 1.0)
 
   const BudgetCard({
     super.key,
@@ -97,7 +96,7 @@ class BudgetCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-
+            
             // Progress Indicator line
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -105,13 +104,11 @@ class BudgetCard extends StatelessWidget {
                 value: progressValue.clamp(0.0, 1.0),
                 minHeight: 8,
                 backgroundColor: AppColors.backgroundColor,
-                valueColor: const AlwaysStoppedAnimation<Color>(
-                  AppColors.primaryColor,
-                ),
+                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
               ),
             ),
             const SizedBox(height: 12),
-
+            
             // Bottom Remaining Text
             Text(
               remainingAmount,

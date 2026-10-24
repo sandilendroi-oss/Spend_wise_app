@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/expense.dart';
 import '../screens/home_screen.dart';
 import '../screens/stats_screen.dart';
@@ -21,26 +20,17 @@ class AppNav {
     if (tab == current) return;
     if (tab == add) {
       // Add is an action, not a tab: push a placeholder on top.
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => const _AddPlaceholder()));
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const _AddPlaceholder()),
+      );
       return;
     }
     _replaceStack(context, tab);
   }
 
   static const _months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
   ];
 
   static String _formatDate(DateTime d) {

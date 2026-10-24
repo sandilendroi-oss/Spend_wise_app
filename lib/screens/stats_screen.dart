@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../models/spend_category.dart';
 import '../theme/app_colors.dart';
-import '../widgets/bottom_nav_bar.dart';
+import '../widgets/bottom_nav_bar.dart'; 
 import '../widgets/budget_card.dart';
 import '../widgets/donut_chart.dart';
-
 import 'package:speed_wise_app/navigations/app_nav.dart';
 
 const _muted = Color(0xFF6B7280);
@@ -25,26 +23,14 @@ class _StatsScreenState extends State<StatsScreen> {
 
   static const _weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   static const _months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
   ];
 
   final DateTime _today = DateTime.now();
-  late final DateTime _weekStart = DateTime(
-    _today.year,
-    _today.month,
-    _today.day,
-  ).subtract(Duration(days: _today.weekday - 1));
+  late final DateTime _weekStart =
+      DateTime(_today.year, _today.month, _today.day)
+          .subtract(Duration(days: _today.weekday - 1));
   late int _selectedIndex = _today.weekday - 1;
 
   final List<SpendCategory> _categories = sampleCategories;
@@ -55,7 +41,7 @@ class _StatsScreenState extends State<StatsScreen> {
 
   // FIXED: Added missing minus operator (- 1)
   String _shortDate(DateTime d) => '${_months[d.month - 1]} ${d.day}';
-
+  
   double _percent(SpendCategory c) =>
       _totalSpent == 0 ? 0 : c.spent / _totalSpent * 100;
 
@@ -90,8 +76,7 @@ class _StatsScreenState extends State<StatsScreen> {
                 backgroundColor: c.tint,
                 iconColor: c.color,
                 categoryName: c.name,
-                percentageSubtitle:
-                    '${_percent(c).toStringAsFixed(1)}% of today',
+                percentageSubtitle: '${_percent(c).toStringAsFixed(1)}% of today',
                 spentAmount: c.spent.toStringAsFixed(2),
                 limitAmount: c.budget.toStringAsFixed(0),
                 remainingAmount: c.remaining >= 0
@@ -104,10 +89,10 @@ class _StatsScreenState extends State<StatsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: AppNav.stats, // 3
-        onTap: (index) => AppNav.onTabTapped(context, index, AppNav.stats),
-      ),
+     bottomNavigationBar: BottomNavBar(
+     currentIndex: AppNav.stats, // 3
+     onTap: (index) => AppNav.onTabTapped(context, index, AppNav.stats),
+     ),
     );
   }
 

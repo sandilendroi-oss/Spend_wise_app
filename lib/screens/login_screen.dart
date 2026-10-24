@@ -48,26 +48,25 @@ class LoginScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                       
                         TextField(
                           decoration: InputDecoration(
                             labelText: 'Email',
-                            labelStyle: const TextStyle(
-                              color: AppColors.textColor,
-                            ),
+                            labelStyle:
+                                const TextStyle(color: AppColors.textColor),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                         ),
                         const SizedBox(height: 16),
-
+                        
                         TextField(
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            labelStyle: const TextStyle(
-                              color: AppColors.textColor,
-                            ),
+                            labelStyle:
+                                const TextStyle(color: AppColors.textColor),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -88,18 +87,19 @@ class LoginScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.cardWhiteColor,
                 foregroundColor: AppColors.backgroundColor,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 12,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Text('Login', style: TextStyle(fontSize: 18)),
+              child: const Text(
+                'Login',
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           ],
-        ),
+        )
       ),
     );
   }
