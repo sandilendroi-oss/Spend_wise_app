@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../models/program.dart';
+import '../services/program_service.dart';
 import '../theme/app_colors.dart';
 import 'program_details_screen.dart';
 
@@ -10,52 +12,20 @@ class ProgramListingScreen extends StatefulWidget {
 }
 
 class _ProgramListingScreenState extends State<ProgramListingScreen> {
+  final ProgramService _service = ProgramService();
+  late Future<List<Program>> _programsFuture;
+
   String filter = 'All';
   String searchQuery = '';
   final TextEditingController _searchController = TextEditingController();
 
-  final programs = const [
-    {
-      'title': 'Leadership & Professional Growth',
-      'date': 'May 5, 2025 – May 26, 2025',
-      'category': 'Leadership',
-      'image': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80',
-      'provider': 'Excelerate Learning Center',
-      'description': 'Build essential leadership skills, improve communication, and prepare for future career opportunities.',
-      'schedule': 'Mon, Wed, Fri • 10:00 AM – 12:00 PM',
-      'eligibility': ['Aged 18+', 'Currently enrolled in a program', 'Motivated to grow professionally'],
-    },
-    {
-      'title': 'Digital Skills Workshop',
-      'date': 'May 12, 2025',
-      'category': 'Tech Skills',
-      'image': 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80',
-      'provider': 'Excelerate Tech Hub',
-      'description': 'Master foundational digital skills, modern software tools, and workflow automation.',
-      'schedule': 'Tue, Thu • 2:00 PM – 4:00 PM',
-      'eligibility': ['Basic computer literacy', 'Aged 16+'],
-    },
-    {
-      'title': 'Wellness & Resilience',
-      'date': 'May 20, 2025',
-      'category': 'Wellness',
-      'image': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80',
-      'provider': 'Excelerate Life Academy',
-      'description': 'Learn effective stress-management techniques and mental resilience strategies.',
-      'schedule': 'Saturdays • 11:00 AM – 1:00 PM',
-      'eligibility': ['Open to all learners'],
-    },
-    {
-      'title': 'Career Development Seminar',
-      'date': 'May 28, 2025',
-      'category': 'Career',
-      'image': 'https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=400&q=80',
-      'provider': 'Excelerate Career Center',
-      'description': 'Gain practical tips on resume building, interviewing, and networking.',
-      'schedule': 'Fridays • 3:00 PM – 5:00 PM',
-      'eligibility': ['Job seekers and students'],
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    // Create the future ONCE here, never inside build(), otherwise the
+    // API is called again on every rebuild (every keystroke in search).
+    _programsFuture = _service.fetchPrograms();
+  }
 
   @override
   void dispose() {
@@ -63,16 +33,23 @@ class _ProgramListingScreenState extends State<ProgramListingScreen> {
     super.dispose();
   }
 
+  void _reload() {
+    setState(() {
+      _programsFuture = _service.fetchPrograms();
+    });
+  }
+
+  Future<void> _refresh() async {
+    _reload();
+    try {
+      await _programsFuture;
+    } catch (_) {
+      // The FutureBuilder shows the error state.
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Filter by category and search query
-    final list = programs.where((p) {
-      final matchesCategory = filter == 'All' || p['category'] == filter;
-      final matchesSearch = (p['title'] as String).toLowerCase().contains(searchQuery.toLowerCase()) ||
-          (p['provider'] as String).toLowerCase().contains(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
-    }).toList();
-
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
@@ -127,96 +104,179 @@ class _ProgramListingScreenState extends State<ProgramListingScreen> {
           ),
           const SizedBox(height: 12),
           Expanded(
-            child: list.isEmpty
-                ? const Center(
+            child: FutureBuilder<List<Program>>(
+              future: _programsFuture,
+              builder: (context, snapshot) {
+                // 1. Loading
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: AppColors.orangeColor),
+                  );
+                }
+
+                // 2. Error
+                if (snapshot.hasError) {
+                  return _ErrorView(
+                    message: snapshot.error.toString().replaceFirst('Exception: ', ''),
+                    onRetry: _reload,
+                  );
+                }
+
+                // 3. Data (filter + search happen on the loaded list)
+                final all = snapshot.data ?? [];
+                final list = all.where((p) {
+                  final q = searchQuery.toLowerCase();
+                  final matchesCategory = filter == 'All' || p.category == filter;
+                  final matchesSearch = p.title.toLowerCase().contains(q) || p.provider.toLowerCase().contains(q);
+                  return matchesCategory && matchesSearch;
+                }).toList();
+
+                if (list.isEmpty) {
+                  return const Center(
                     child: Text('No programs found', style: TextStyle(color: Colors.grey, fontSize: 16)),
-                  )
-                : ListView.builder(
+                  );
+                }
+
+                return RefreshIndicator(
+                  color: AppColors.orangeColor,
+                  onRefresh: _refresh,
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(16),
                     itemCount: list.length,
-                    itemBuilder: (context, i) {
-                      final p = list[i];
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 16),
-                        decoration: BoxDecoration(color: AppColors.cardWhiteColor, borderRadius: BorderRadius.circular(16)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                                  child: Image.network(
-                                    p['image']! as String,
-                                    height: 130,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                    // Optimization: Cache image dimensions to reduce memory overhead and stuttering
-                                    cacheWidth: 800,
-                                    loadingBuilder: (context, child, loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return Container(
-                                        height: 130,
-                                        color: Colors.grey.shade200,
-                                        child: const Center(
-                                          child: SizedBox(
-                                            width: 20,
-                                            height: 20,
-                                            child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.orangeColor),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    errorBuilder: (context, error, stackTrace) => Container(
-                                      height: 130,
-                                      color: Colors.grey.shade300,
-                                      child: const Icon(Icons.broken_image, color: Colors.grey),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 12,
-                                  left: 12,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                    decoration: BoxDecoration(color: AppColors.orangeColor, borderRadius: BorderRadius.circular(12)),
-                                    child: Text(p['category']! as String, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(14),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(p['title']! as String, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor)),
-                                  const SizedBox(height: 6),
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.calendar_today_outlined, size: 14, color: AppColors.pinkColor),
-                                      const SizedBox(width: 6),
-                                      Text(p['date']! as String, style: TextStyle(fontSize: 13, color: AppColors.textColor.withValues(alpha: 0.7))),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(gradient: AppColors.brandGradient, borderRadius: BorderRadius.circular(10)),
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
-                                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProgramDetailsScreen(data: p))),
-                                      child: const Text('View Details', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                    itemBuilder: (context, i) => _ProgramCard(
+                      program: list[i],
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ProgramDetailsScreen(program: list[i])),
+                      ),
+                    ),
                   ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ErrorView extends StatelessWidget {
+  final String message;
+  final VoidCallback onRetry;
+  const _ErrorView({required this.message, required this.onRetry});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.cloud_off, size: 56, color: AppColors.pinkColor),
+            const SizedBox(height: 12),
+            const Text('Could not load programs',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor)),
+            const SizedBox(height: 6),
+            Text(message,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: AppColors.textColor.withValues(alpha: 0.7))),
+            const SizedBox(height: 16),
+            ElevatedButton.icon(
+              onPressed: onRetry,
+              icon: const Icon(Icons.refresh),
+              label: const Text('Try again'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProgramCard extends StatelessWidget {
+  final Program program;
+  final VoidCallback onTap;
+  const _ProgramCard({required this.program, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(color: AppColors.cardWhiteColor, borderRadius: BorderRadius.circular(16)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                child: Image.network(
+                  program.image,
+                  height: 130,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  cacheWidth: 800,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Container(
+                      height: 130,
+                      color: Colors.grey.shade200,
+                      child: const Center(
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.orangeColor),
+                        ),
+                      ),
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    height: 130,
+                    color: Colors.grey.shade300,
+                    child: const Icon(Icons.broken_image, color: Colors.grey),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 12,
+                left: 12,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(color: AppColors.orangeColor, borderRadius: BorderRadius.circular(12)),
+                  child: Text(program.category, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(program.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor)),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_today_outlined, size: 14, color: AppColors.pinkColor),
+                    const SizedBox(width: 6),
+                    Text(program.date, style: TextStyle(fontSize: 13, color: AppColors.textColor.withValues(alpha: 0.7))),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(gradient: AppColors.brandGradient, borderRadius: BorderRadius.circular(10)),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
+                    onPressed: onTap,
+                    child: const Text('View Details', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
