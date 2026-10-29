@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:speed_wise_app/screens/registration_feedback_screen.dart';
+import '../models/program.dart';
 import '../theme/app_colors.dart';
 
 class ProgramDetailsScreen extends StatelessWidget {
-  final Map<String, dynamic> data;
-  const ProgramDetailsScreen({super.key, required this.data});
+  final Program program;
+  const ProgramDetailsScreen({super.key, required this.program});
+
+  TextStyle get _heading => const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor);
+  TextStyle get _body => TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8));
 
   @override
   Widget build(BuildContext context) {
-    final eligibilityList = List<String>.from(data['eligibility'] as List);
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
@@ -20,7 +24,7 @@ class ProgramDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              data['image']! as String,
+              program.image,
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -30,9 +34,7 @@ class ProgramDetailsScreen extends StatelessWidget {
                 return Container(
                   height: 200,
                   color: Colors.grey.shade200,
-                  child: const Center(
-                    child: CircularProgressIndicator(color: AppColors.orangeColor),
-                  ),
+                  child: const Center(child: CircularProgressIndicator(color: AppColors.orangeColor)),
                 );
               },
               errorBuilder: (context, error, stackTrace) => Container(
@@ -48,38 +50,59 @@ class ProgramDetailsScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: Text(data['title']! as String, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textColor))),
+                      Expanded(
+                        child: Text(program.title,
+                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textColor)),
+                      ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(color: AppColors.orangeColor.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
-                        child: const Text('Upcoming', style: TextStyle(color: AppColors.orangeColor, fontSize: 12, fontWeight: FontWeight.bold)),
+                        decoration: BoxDecoration(
+                          color: AppColors.orangeColor.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Text('Upcoming',
+                            style: TextStyle(color: AppColors.orangeColor, fontSize: 12, fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text('Provider: ${data['provider']}', style: const TextStyle(color: AppColors.pinkColor, fontWeight: FontWeight.w600)),
+                  Text('Provider: ${program.provider}',
+                      style: const TextStyle(color: AppColors.pinkColor, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 16),
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(gradient: AppColors.brandGradient, borderRadius: BorderRadius.circular(12)),
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent, padding: const EdgeInsets.symmetric(vertical: 16)),
-                      onPressed: () {},
-                      child: const Text('Register', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      // Member 3: navigate to the registration form, passing `program`.
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FormsHubScreen(program: program),
+                          ),
+                        );
+                      },
+                      child: const Text('Register',
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text('Program Description', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor)),
+                  Text('Program Description', style: _heading),
                   const SizedBox(height: 6),
-                  Text(data['description']! as String, style: TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8))),
+                  Text(program.description, style: _body),
                   const SizedBox(height: 16),
-                  const Text('Schedule', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor)),
+                  Text('Schedule', style: _heading),
                   const SizedBox(height: 6),
-                  Text(data['schedule']! as String, style: TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8))),
+                  Text(program.schedule, style: _body),
                   const SizedBox(height: 16),
-                  const Text('Eligibility Criteria', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor)),
+                  Text('Eligibility Criteria', style: _heading),
                   const SizedBox(height: 6),
-                  ...eligibilityList.map((e) => Text('• $e', style: TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8)))),
+                  ...program.eligibility.map((e) => Text('• $e', style: _body)),
                 ],
               ),
             ),
