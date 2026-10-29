@@ -9,6 +9,11 @@ class ProgramDetailsScreen extends StatelessWidget {
 
   TextStyle get _heading => const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor);
   TextStyle get _body => TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8));
+  final Program program;
+  const ProgramDetailsScreen({super.key, required this.program});
+
+  TextStyle get _heading => const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor);
+  TextStyle get _body => TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8));
 
   @override
   Widget build(BuildContext context) {
