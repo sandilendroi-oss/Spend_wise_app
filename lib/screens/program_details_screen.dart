@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:speed_wise_app/screens/registration_feedback_screen.dart';
 import '../models/program.dart';
 import '../theme/app_colors.dart';
 
 class ProgramDetailsScreen extends StatelessWidget {
+  final Program program;
+  const ProgramDetailsScreen({super.key, required this.program});
+
+  TextStyle get _heading => const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor);
+  TextStyle get _body => TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8));
   final Program program;
   const ProgramDetailsScreen({super.key, required this.program});
 
@@ -78,7 +84,14 @@ class ProgramDetailsScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
                       // Member 3: navigate to the registration form, passing `program`.
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FormsHubScreen(program: program),
+                          ),
+                        );
+                      },
                       child: const Text('Register',
                           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
