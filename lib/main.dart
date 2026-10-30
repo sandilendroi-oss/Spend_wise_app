@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:speed_wise_app/screens/login_screen.dart';
 import 'package:speed_wise_app/screens/program_listing_screen.dart';
 import 'package:speed_wise_app/theme/app_theme.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Excelerate',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: const ProgramListingScreen(),
+      home: const LoginScreen(),
     );
   }
 }

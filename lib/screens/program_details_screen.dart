@@ -4,11 +4,7 @@ import '../models/program.dart';
 import '../theme/app_colors.dart';
 
 class ProgramDetailsScreen extends StatelessWidget {
-  final Program program;
-  const ProgramDetailsScreen({super.key, required this.program});
 
-  TextStyle get _heading => const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textColor);
-  TextStyle get _body => TextStyle(fontSize: 14, color: AppColors.textColor.withValues(alpha: 0.8));
   final Program program;
   const ProgramDetailsScreen({super.key, required this.program});
 

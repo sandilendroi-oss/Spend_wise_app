@@ -203,6 +203,10 @@ class _ProgramCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check if the URL is valid and non-empty
+    final bool hasValidImage = program.image.isNotEmpty && 
+        (program.image.startsWith('http://') || program.image.startsWith('https://'));
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(color: AppColors.cardWhiteColor, borderRadius: BorderRadius.circular(16)),
@@ -213,32 +217,49 @@ class _ProgramCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                child: Image.network(
-                  program.image,
-                  height: 130,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  cacheWidth: 800,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Container(
-                      height: 130,
-                      color: Colors.grey.shade200,
-                      child: const Center(
-                        child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.orangeColor),
+                child: !hasValidImage
+                    ? Container(
+                        height: 130,
+                        color: Colors.grey.shade300,
+                        child: const Center(
+                          child: Icon(Icons.broken_image, color: Colors.grey, size: 40),
                         ),
+                      )
+                    : Image.network(
+                        program.image,
+                        height: 130,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        cacheWidth: 800,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            height: 130,
+                            color: Colors.grey.shade200,
+                            child: const Center(
+                              child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.orangeColor),
+                              ),
+                            ),
+                          );
+                        },
+                        errorBuilder: (context, error, stackTrace) {
+                          // Debug print to inspect the exact failing URL and error in your console
+                          print('Failed to load image for "${program.title}"');
+                          print('URL was: ${program.image}');
+                          print('Error: $error');
+
+                          return Container(
+                            height: 130,
+                            color: Colors.grey.shade300,
+                            child: const Center(
+                              child: Icon(Icons.broken_image, color: Colors.grey, size: 40),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    height: 130,
-                    color: Colors.grey.shade300,
-                    child: const Icon(Icons.broken_image, color: Colors.grey),
-                  ),
-                ),
               ),
               Positioned(
                 top: 12,
