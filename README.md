@@ -1,138 +1,70 @@
-# SpendWise 
-
-**A simple personal expense tracker built with Flutter.**
-
-SpendWise helps people record their daily spending, stay within a monthly budget, and understand where their money goes, using clear summaries and charts.
-
-> **Status:** Week 2 UI prototype. The screens are built and connected with sample data. Real authentication, a database, and full add/edit/delete are planned for later weeks.
-
----
-
-## Table of Contents
-
-1. [Project Vision](#project-vision)
-2. [Objectives](#objectives)
-3. [Features](#features)
-4. [Navigation Flow](#navigation-flow)
-5. [Project Structure](#project-structure)
-6. [Getting Started](#getting-started)
-7. [Design](#design)
-8. [Roadmap](#roadmap)
-9. [Team and Workflow](#team-and-workflow)
-
----
-
-## Project Vision
-
-Many people reach the end of the month unsure where their money went. Spreadsheets are tedious, and many finance apps are cluttered. SpendWise aims to be a fast, friendly, and uncluttered way to log expenses in a few taps and see clearly how much of the budget is left.
-
-## Objectives
-
-- Make logging an expense quick and effortless.
-- Give users an at-a-glance view of what they have spent and what remains in their budget.
-- Show which categories take up the largest share of their spending.
-- Warn users before they overspend, not after.
-- Build a clean, consistent Flutter UI based on our Figma design, using reusable widgets.
-
-## Features
-
-**In the current prototype (sample data)**
-
-- **Login:** welcome screen with email and password fields.
-- **Home / Dashboard:** total balance, weekly spending chart, and recent expenses.
-- **Stats:** weekly date selector, daily spending donut chart, and a budget breakdown by category (Groceries, Food & Drink, Bills).
-- **Expense Details:** amount, merchant, date, category, payment method, notes, and receipt placeholder.
-- **Bottom navigation** shared across the main screens.
-
-**Planned**
-
-- Add, edit, and delete expenses
-- Monthly budget with a warning when spending nears the limit
-- Weekly and monthly spending reports
-- Real authentication and persistent storage
-
-
-## Navigation Flow
-
-```mermaid
-flowchart LR
-    A[Login] -->|Log In| B[Home]
-    B -->|Stats tab| C[Stats]
-    B -->|Add Expense tab| D[Add Expense*]
-    B -->|Settings tab| E[Settings*]
-    B -->|Tap an expense| F[Expense Details]
-    F -->|Back| B
-    C --> B
-```
-
-\* Placeholder screens for now.
-
-In words:
-
-1. The user opens the app on the **Login** screen and taps **Log In**.
-2. They land on **Home**, which shows their balance, weekly spending, and recent expenses. After logging in, the back button does not return to Login.
-3. The **bottom navigation bar** (Home, Add Expense, Settings, Stats) switches between the main sections.
-4. Tapping an expense on Home opens **Expense Details**, and the back button returns to where the user came from.
-
-## Project Structure
-
-```
+Excelerate Mobile App
+A clean, responsive mobile application built with Flutter that provides learners with a seamless platform to discover programs, register for professional development workshops, track event schedules, and submit session feedback.
+Table of Contents
+ * Project Overview
+ * Key Features
+ * Tech Stack
+ * Folder Structure
+ * Setup and Installation
+ * Screenshots
+ * Contribution Log
+Project Overview
+The Excelerate Mobile App centralizes career development opportunities for ambitious learners. The application eliminates manual administrative overhead by enabling automated registration and feedback tracking via a dedicated REST API integration.
+Key Features
+ * User Authentication: Login interface with validation for learner accounts.
+ * Learner Dashboard: Overview metrics showing registered programs, upcoming events, and submitted feedback.
+ * Program Catalog & Filtering: Dynamic course listings filterable by category (Leadership, Tech Skills, Wellness, Career).
+ * Program Details: In-depth view of program schedules, providers, and eligibility criteria.
+ * Registration & Feedback Forms: Interactive tabbed interface supporting real-time data submission to Mock API endpoints.
+Tech Stack
+ * Framework: Flutter (Dart)
+ * API Integration: http package connected to RESTful Mock API endpoints
+ * Version Control: Git & GitHub
+Folder Structure
 lib/
-├── main.dart          # App entry point and theme
-├── screens/           # Full pages (login, home, stats, expense details)
-├── widgets/           # Reusable components (budget card, bottom nav, donut chart, ...)
-├── models/            # Data classes and sample data
-└── theme/             # App colors and theme
-```
+├── models/
+├── navigations/
+├── screens/
+│   ├── home_screen.dart
+│   ├── login_screen.dart
+│   ├── program_details_screen.dart
+│   ├── program_listing_screen.dart
+│   ├── registration_feedback_screen.dart
+│   └── stats_screen.dart
+├── theme/
+├── widgets/
+└── main.dart
 
-## Getting Started
-
-**Prerequisites:** [Flutter SDK](https://docs.flutter.dev/get-started/install) and an emulator, simulator, or physical device (or Chrome for web).
-
-```bash
-# 1. Clone the repository
-git clone <repository-url>
+Setup and Installation
+Prerequisites
+ * Flutter SDK (latest stable release)
+ * Dart SDK
+ * Android Studio, VS Code, or Xcode (for iOS builds)
+Steps
+ * Clone the repository:
+   git clone https://github.com/sandilendroi-oss/Spend_wise_app.git
 cd Spend_wise_app
 
-# 2. Install dependencies
-flutter pub get
+ * Install dependencies:
+   flutter pub get
 
-# 3. Run the app
-flutter run
-```
+ * Run the application:
+   flutter run
 
-To check your setup, run `flutter doctor`.
+Team and Workflow
+Team 3 (0510 SLU MAD)
 
-## Design
-
-- **Wireframes / UI design:** (https://www.figma.com/design/M6uNxY943fLev9XJcjnPpx/Untitled?node-id=0-1&t=92dVFBTKX2SMGlNO-1)*
-- **Style:** a soft green palette, rounded white cards, and clear typography. Colors are defined in `lib/theme/app_colors.dart`.
-
-## Roadmap
-
-- [x] Week 1: proposal, wireframes, repository setup
-- [x] Week 2: UI prototype with navigation (sample data)
-- [ ] Week 3: connect real data, working add/edit/delete
-- [ ] Later: monthly budget warnings, reports, authentication, storage
-
-## Team and Workflow
-
-**Team 3 (0510 SLU MAD)**
-
-- Shimaa Kamal M
-- Adeniyi Adeyinka
-- Ange Mukundente
-- Sabikun Naher Meem
-- Chaudhary Siddhant Baliyan
-- Emama
-- Eseosa Ogolo
-- Kevin Okhale
-- Sandile Ndroi
-- Shariana Dee
-- Mohana Aswath
-
-**Git workflow:** Each contributor works on a separate branch, commits with clear messages, and opens a pull request into `main`.
-
----
+Shimaa Kamal M
+Adeniyi Adeyinka
+Ange Mukundente
+Sabikun Naher Meem
+Chaudhary Siddhant Baliyan
+Emama
+Eseosa Ogolo
+Kevin Okhale
+Sandile Ndroi
+Shariana Dee
+Mohana Aswath
+Git workflow: Each contributor works on a separate branch, commits with clear messages, and opens a pull request into main.
 
 Built as part of a mobile app internship.
