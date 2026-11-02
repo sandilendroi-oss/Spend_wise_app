@@ -1,52 +1,4 @@
-<<<<<<< HEAD
-Excelerate Mobile App
-A clean, responsive mobile application built with Flutter that provides learners with a seamless platform to discover programs, register for professional development workshops, track event schedules, and submit session feedback.
-Table of Contents
- * Project Overview
- * Key Features
- * Tech Stack
- * Folder Structure
- * Setup and Installation
- * Screenshots
- * Contribution Log
-Project Overview
-The Excelerate Mobile App centralizes career development opportunities for ambitious learners. The application eliminates manual administrative overhead by enabling automated registration and feedback tracking via a dedicated REST API integration.
-Key Features
- * User Authentication: Login interface with validation for learner accounts.
- * Learner Dashboard: Overview metrics showing registered programs, upcoming events, and submitted feedback.
- * Program Catalog & Filtering: Dynamic course listings filterable by category (Leadership, Tech Skills, Wellness, Career).
- * Program Details: In-depth view of program schedules, providers, and eligibility criteria.
- * Registration & Feedback Forms: Interactive tabbed interface supporting real-time data submission to Mock API endpoints.
-Tech Stack
- * Framework: Flutter (Dart)
- * API Integration: http package connected to RESTful Mock API endpoints
- * Version Control: Git & GitHub
-Folder Structure
-lib/
-├── models/
-├── navigations/
-├── screens/
-│   ├── home_screen.dart
-│   ├── login_screen.dart
-│   ├── program_details_screen.dart
-│   ├── program_listing_screen.dart
-│   ├── registration_feedback_screen.dart
-│   └── stats_screen.dart
-├── theme/
-├── widgets/
-└── main.dart
-
-Setup and Installation
-Prerequisites
- * Flutter SDK (latest stable release)
- * Dart SDK
- * Android Studio, VS Code, or Xcode (for iOS builds)
-Steps
- * Clone the repository:
-   git clone https://github.com/sandilendroi-oss/Spend_wise_app.git
-cd Spend_wise_app
-=======
-# Excelerate — Program Discovery & Registration App
+# Elevate
 
 > **A Flutter mobile application that helps learners discover, explore, and register for professional development programs.**
 
@@ -75,13 +27,9 @@ cd Spend_wise_app
 
 ## 🎯 Project Overview
 
-**Excelerate** is a cross-platform Flutter mobile app built to bridge the gap between learners and professional development opportunities. Users can browse upcoming programs across categories like **Leadership**, **Tech Skills**, **Wellness**, and **Career Development**, view full program details including schedules and eligibility criteria, and register directly from the app.
+**Elevate** is a cross-platform Flutter mobile app built to bridge the gap between learners and professional development opportunities. Users can browse upcoming programs across categories like **Leadership**, **Tech Skills**, **Wellness**, and **Career Development**, view full program details including schedules and eligibility criteria, and register directly from the app.
 
-The app also includes a **Feedback Form** so participants can rate and review programs after attending.
 
-> **Current Status:** Week 3 — Core screens are fully built with live mock-API integration. Registration and feedback forms POST data to a real REST API endpoint.
-
----
 
 ## ✨ Key Features
 
@@ -169,36 +117,6 @@ lib/
 
 ---
 
-## 🗄️ Data Models
-
-### `Program`
-
-The central model representing a learning program. All fields are parsed defensively — only `title` is required; all others fall back to an empty string so a single bad record cannot crash the UI.
-
-| Field | Type | Description |
-|---|---|---|
-| `id` | `String` | Unique identifier from the API |
-| `title` | `String` | Program name *(required)* |
-| `date` | `String` | Date range or single session date |
-| `category` | `String` | `Leadership`, `Tech Skills`, `Wellness`, `Career` |
-| `image` | `String` | URL to the program cover image |
-| `provider` | `String` | Organization or team running the program |
-| `description` | `String` | Full description of program content |
-| `schedule` | `String` | Days and time slots |
-| `eligibility` | `List<String>` | Bullet list of participation requirements |
-
-### `Event` *(Proposed — future use)*
-
-| Field | Type | Description |
-|---|---|---|
-| `id` | `String` | Unique identifier |
-| `title` | `String` | Event name *(required)* |
-| `description` | `String` | Short summary |
-| `date` | `String` | Date string |
-| `location` | `String` | Venue or online link |
-| `programId` | `String?` | Optional link to a parent program |
-
----
 
 ## 🔌 Services & API
 
@@ -219,9 +137,6 @@ flutter run --dart-define=API_BASE_URL=https://your-api.mockapi.io/api/v1
 
 **Error type:** `ApiException(message, {statusCode?})` — always a human-readable English message, safe to display directly in the UI.
 
-### `ProgramService`
-
-A thin wrapper used by the Program Listing screen. Currently returns **mock data** with a simulated 2-second network delay. Swap in `ApiService.fetchPrograms()` to go live.
 
 ### Mock API Endpoint
 
@@ -232,31 +147,7 @@ A thin wrapper used by the Program Listing screen. Currently returns **mock data
 
 Base URL: `https://6adc37259cae184827ad0d2b.mockapi.io/api/v1`
 
----
 
-## 🎨 Theme & Design System
-
-### Color Palette
-
-| Token | Hex | Usage |
-|---|---|---|
-| `orangeColor` | `#EA7553` | Icons, loading indicators |
-| `coralColor` / `primaryColor` | `#EB684B` | Login background, primary buttons |
-| `pinkColor` | `#D9508A` | Category chips (selected), icons |
-| `magentaColor` / `secondaryColor` | `#CC43B3` | Gradient end color |
-| `backgroundColor` | `#FFF7F4` | Warm off-white page background |
-| `cardWhiteColor` | `#FFFFFF` | Card surfaces, form fields |
-| `textColor` | `#2B2B33` | Body text, labels |
-
-### Brand Gradient
-
-A four-stop linear gradient (orange → coral → pink → magenta) applied to app bar headers and primary action buttons throughout the app.
-
-```dart
-AppColors.brandGradient  // LinearGradient([orangeColor, coralColor, pinkColor, magentaColor])
-```
-
----
 
 ## 🚀 Getting Started
 
@@ -279,26 +170,6 @@ cd Speed_wise_app
  * Install dependencies:
    flutter pub get
 
-<<<<<<< HEAD
- * Run the application:
-   flutter run
-
-Team and Workflow
-Team 3 (0510 SLU MAD)
-
-Shimaa Kamal M
-Adeniyi Adeyinka
-Ange Mukundente
-Sabikun Naher Meem
-Chaudhary Siddhant Baliyan
-Emama
-Eseosa Ogolo
-Kevin Okhale
-Sandile Ndroi
-Shariana Dee
-Mohana Aswath
-Git workflow: Each contributor works on a separate branch, commits with clear messages, and opens a pull request into main.
-=======
 # 3. Run on your target device
 flutter run
 
@@ -310,34 +181,9 @@ flutter build apk --release
 ```
 
 ---
->>>>>>> 2752416 ( i have updated the Readme to me more detailed)
 
-## ⚙️ Configuration
 
-| Variable | How to set | Default |
-|---|---|---|
-| `API_BASE_URL` | `--dart-define=API_BASE_URL=<url>` | MockAPI placeholder |
 
-Example with a custom API:
-
-```bash
-flutter run --dart-define=API_BASE_URL=https://my-real-api.com/api/v1
-```
-
----
-
-## 🗺️ Roadmap
-
-- [x] Week 1 — Project proposal, wireframes, repository setup  
-- [x] Week 2 — UI prototype with navigation and sample data  
-- [x] Week 3 — Mock API integration, registration & feedback forms  
-- [ ] Week 4 — Real authentication (Firebase Auth or JWT)  
-- [ ] Week 4 — Persistent local storage (Hive / SQLite)  
-- [ ] Later — Push notifications for upcoming programs  
-- [ ] Later — User profile & registration history  
-- [ ] Later — Monthly analytics & spending reports (legacy SpendWise features)  
-
----
 
 ## 👥 Team
 
@@ -345,19 +191,12 @@ flutter run --dart-define=API_BASE_URL=https://my-real-api.com/api/v1
 
 | Name | Role |
 |---|---|
-| Shimaa Kamal M | Team Lead / UI |
+| Shimaa Kamal M | Team Lead / UI / Developer| 
 | Adeniyi Adeyinka | Developer |
 | Ange Mukundente | Developer |
-| Sabikun Naher Meem | Developer |
 | Chaudhary Siddhant Baliyan | Developer |
-| Emama | Developer |
-| Eseosa Ogolo | Developer |
-| Kevin Okhale | Developer |
 | Sandile Ndroi | Developer |
-| Shariana Dee | Developer |
-| Mohana Aswath | Developer |
 
-**Git workflow:** Each contributor works on a separate feature branch, commits with descriptive messages, and opens a pull request into `main` for review before merging.
 
 ---
 
